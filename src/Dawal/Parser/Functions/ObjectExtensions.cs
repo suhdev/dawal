@@ -57,6 +57,41 @@ namespace Dawal.Parser.Functions
     {
       return (bool)value;
     }
+
+    public static decimal CoerceToNumber(this object value)
+    {
+      if (value is null)
+      {
+        return 0;
+      }
+
+      if (value is string)
+      {
+        if (string.IsNullOrWhiteSpace((string)value))
+        {
+          return 0;
+        }
+        
+        if (!decimal.TryParse((string)value, out var val))
+        {
+          return 0;
+        }
+
+        return val;
+      }
+
+      if (value.IsNumber())
+      {
+        return value.ToNumber();
+      }
+
+      if (value.IsBool())
+      {
+        return value.ToBool() ? 1 : 0;
+      }
+
+      return 1;
+    }
     
     public static bool CoerceToBool(this object value)
     {
@@ -72,7 +107,7 @@ namespace Dawal.Parser.Functions
 
       if (value is string)
       {
-        return !string.IsNullOrEmpty(value.ToStringValue());
+        return !string.IsNullOrWhiteSpace(value.ToStringValue());
       }
 
       if (value.IsNumber())

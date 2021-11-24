@@ -64,7 +64,7 @@ namespace Dawal.UnitTests.Functions
     }
     
     [Fact]
-    public async Task ItShouldThrowIfMoreThanTwoParametersArePassed()
+    public async Task ItShouldThrowIfInvalidNumberOfArgumentsArePassed()
     {
       // arrange 
       var fn = new EqualToFunction();

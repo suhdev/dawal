@@ -29,7 +29,7 @@ namespace Dawal.UnitTests.Functions
     }
 
     [Fact]
-    public async Task ItShouldThrowIfMoreThanOneParameterIsPassed()
+    public async Task ItShouldThrowIfInvalidNumberOfArgumentsArePassed()
     {
       // arrange 
       var fn = new NotFunction();

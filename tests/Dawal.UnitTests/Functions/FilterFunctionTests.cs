@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Dawal.Parser;
 using Dawal.Parser.Functions;
@@ -8,13 +9,13 @@ using Xunit;
 
 namespace Dawal.UnitTests.Functions
 {
-  public class FindOneFunctionTests
+  public class FilterFunctionTests
   {
     [Fact]
     public async Task ShouldEvaluateValuesCorrectly()
     {
       // arrange
-      var fn = new FindOneFunction();
+      var fn = new FilterFunction();
       var mock = new BaseEvaluationContext(new IEvaluationFunction[]
       {
         new EqualToFunction(),
@@ -50,17 +51,17 @@ namespace Dawal.UnitTests.Functions
       
       // act 
       var result = await fn.ExecuteAsync(mock, 
-        someList, "FirstName", "James", "age", 44);
+        someList, "age", "lt", 45);
       
       // assert
-      result.Should().Be(someList[1]);
+      result.Should().BeEquivalentTo(someList.Where(x => x.Age < 45));
     }
     
     [Fact]
     public async Task ShouldEvaluateValuesCorrectlyWithoutFunctionNames()
     {
       // arrange
-      var fn = new FindOneFunction();
+      var fn = new FilterFunction();
       var mock = new BaseEvaluationContext(new IEvaluationFunction[]
       {
         new EqualToFunction(),
@@ -84,7 +85,7 @@ namespace Dawal.UnitTests.Functions
         {
           FirstName = "James",
           LastName = "Gunn",
-          Age = 44
+          Age = 33
         },
         new CustomObject()
         {
@@ -96,28 +97,21 @@ namespace Dawal.UnitTests.Functions
       
       // act 
       var result = await fn.ExecuteAsync(mock, 
-        someList, "FirstName", "equal_to", "James", "age", "gt", 33);
+        someList, "age", 33);
       
       // assert
-      result.Should().Be(someList[1]);
+      result.Should().BeEquivalentTo(someList.Where(x => x.Age == 33));
     }
     
     [Fact]
     public async Task ItShouldThrowIfInvalidNumberOfArgumentsArePassed()
     {
       // arrange 
-      var fn = new FindOneFunction();
+      var fn = new FilterFunction();
       var mock = new Mock<IEvaluationContext>();
       
       // act & assert
       await Assert.ThrowsAsync<InvalidNumberOfArgumentException>(async () => await fn.ExecuteAsync(mock.Object, 10));
     }
-  }
-
-  internal class CustomObject
-  {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public int Age { get; set; }
   }
 }

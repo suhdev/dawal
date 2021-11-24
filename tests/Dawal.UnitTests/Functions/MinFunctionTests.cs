@@ -1,0 +1,52 @@
+using System.Linq;
+using System.Threading.Tasks;
+using Dawal.Parser;
+using Dawal.Parser.Functions;
+using FluentAssertions;
+using Moq;
+using Xunit;
+
+namespace Dawal.UnitTests.Functions
+{
+  public class MinFunctionTests
+  {
+    [Fact]
+    public async Task ShouldEvaluateValuesCorrectly()
+    {
+      // arrange
+      var fn = new MinFunction();
+      var mock = new Mock<IEvaluationContext>();
+      
+      // act 
+      var result = await fn.ExecuteAsync(mock.Object, 10 , 100 , 200, 300);
+      
+      // assert
+      result.Should().Be(new []{10 , 100 , 200, 300}.Min());
+    }
+    
+    [Fact]
+    public async Task ShouldEvaluateValuesCorrectlyWithMixOfValueTypes()
+    {
+      // arrange
+      var fn = new MinFunction();
+      var mock = new Mock<IEvaluationContext>();
+      
+      // act 
+      var result = await fn.ExecuteAsync(mock.Object, 10 , false , 200, 300, "12.22");
+      
+      // assert
+      result.Should().Be(new decimal[]{10 , 0 , 200, 300, (decimal)12.22}.Min());
+    }
+    
+    [Fact]
+    public async Task ItShouldThrowIfInvalidNumberOfArgumentsArePassed()
+    {
+      // arrange 
+      var fn = new MinFunction();
+      var mock = new Mock<IEvaluationContext>();
+      
+      // act & assert
+      await Assert.ThrowsAsync<InvalidNumberOfArgumentException>(async () => await fn.ExecuteAsync(mock.Object));
+    }
+  }
+}

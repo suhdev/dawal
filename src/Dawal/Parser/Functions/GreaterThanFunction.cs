@@ -37,6 +37,11 @@ namespace Dawal.Parser.Functions
         return false;
       }
 
+      if (firstVal.IsDate())
+      {
+        return firstVal.CoerceToNumber() > secondVal.CoerceToNumber();
+      }
+
       if (firstVal.IsNumber())
       {
         return firstVal.ToNumber() > secondVal.ToNumber();

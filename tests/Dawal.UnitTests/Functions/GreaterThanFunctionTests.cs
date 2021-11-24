@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Dawal.Parser;
 using Dawal.Parser.Functions;
@@ -38,6 +39,26 @@ namespace Dawal.UnitTests.Functions
       result.Should().Be(expected);
     }
     
+    [Fact]
+    public async Task ShouldEvaluateDateValuesCorrectly()
+    {
+      // arrange
+      var fn = new GreaterThanFunction();
+      var mock = new Mock<IEvaluationContext>();
+      
+      // act 
+      var result = await fn.ExecuteAsync(mock.Object, 
+        DateTimeOffset.UtcNow.AddDays(100), 
+        DateTimeOffset.UtcNow.AddDays(10));
+      var result2 = await fn.ExecuteAsync(mock.Object, 
+        DateTimeOffset.UtcNow.AddDays(10), 
+        DateTimeOffset.UtcNow.AddDays(100));
+      
+      // assert
+      result.Should().Be(true);
+      result2.Should().Be(false);
+    }
+
     [Fact]
     public async Task ItShouldThrowIfInvalidNumberOfArgumentsArePassed()
     {

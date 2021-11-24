@@ -42,7 +42,7 @@ namespace Dawal.UnitTests.Functions
     public async Task ItShouldThrowIfInvalidNumberOfArgumentsArePassed()
     {
       // arrange 
-      var fn = new EqualToFunction();
+      var fn = new LessThanFunction();
       var mock = new Mock<IEvaluationContext>();
       
       // act & assert

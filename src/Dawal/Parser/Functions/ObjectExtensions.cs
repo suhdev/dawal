@@ -53,9 +53,32 @@ namespace Dawal.Parser.Functions
              || value is ushort;
     }
 
+    public static bool IsDate(this object value)
+    {
+      return value is DateTime ||
+             value is DateTimeOffset;
+    }
+
     public static bool ToBool(this object value)
     {
       return (bool)value;
+    }
+
+    public static DateTimeOffset CoerceToDateTime(this object value)
+    {
+      if (value is null)
+      {
+        return DateTimeOffset.Now;
+      }
+
+      if (value.IsDate())
+      {
+        return value is DateTime time
+          ? new DateTimeOffset(time)
+          : (DateTimeOffset)value;
+      }
+      
+      return DateTimeOffset.Now;
     }
 
     public static decimal CoerceToNumber(this object value)
@@ -63,6 +86,11 @@ namespace Dawal.Parser.Functions
       if (value is null)
       {
         return 0;
+      }
+
+      if (value.IsDate())
+      {
+        return value.CoerceToDateTime().UtcTicks;
       }
 
       if (value is string)

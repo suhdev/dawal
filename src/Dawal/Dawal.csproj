@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageId>Dawal</PackageId>
+        <Title>Kelmeh Expression Language</Title>
+        <Authors>Suhail Abood &lt;suhail.abood@gmail.com&gt;</Authors>
+        <Description>An extensible expression language</Description>
+        <Copyright>suhdev</Copyright>
+        <PackageProjectUrl>https://github.com/suhdev/kelmeh</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/suhdev/kelmeh</RepositoryUrl>
+        <Company>Sticky Ants Ltd</Company>
+        <Product>Kelmeh</Product>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <FileVersion>1.0.0</FileVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="CaseExtensions" Version="1.1.0" />
+    </ItemGroup>
+
+</Project>

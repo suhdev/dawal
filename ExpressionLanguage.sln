@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dawal", "src\Dawal\Dawal.csproj", "{4731BB72-E696-4368-8236-55D52EA8CAA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dawal.UnitTests", "tests\Dawal.UnitTests\Dawal.UnitTests.csproj", "{77930632-3B81-49C9-A1E5-DE93D8EFF810}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{EFBBA204-5349-4369-9D10-402086E3C9B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4731BB72-E696-4368-8236-55D52EA8CAA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4731BB72-E696-4368-8236-55D52EA8CAA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4731BB72-E696-4368-8236-55D52EA8CAA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4731BB72-E696-4368-8236-55D52EA8CAA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77930632-3B81-49C9-A1E5-DE93D8EFF810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77930632-3B81-49C9-A1E5-DE93D8EFF810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77930632-3B81-49C9-A1E5-DE93D8EFF810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77930632-3B81-49C9-A1E5-DE93D8EFF810}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{77930632-3B81-49C9-A1E5-DE93D8EFF810} = {EFBBA204-5349-4369-9D10-402086E3C9B1}
+	EndGlobalSection
+EndGlobal

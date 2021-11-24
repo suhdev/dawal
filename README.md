@@ -1,4 +1,4 @@
-# Dawal
+# Dawal [![.NET](https://github.com/suhdev/dawal/actions/workflows/dotnet.yml/badge.svg)](https://github.com/suhdev/dawal/actions/workflows/dotnet.yml)
 
 A simple extensible expression language for .net applications.
 

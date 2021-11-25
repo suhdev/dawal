@@ -27,12 +27,10 @@ EqualTo(100, 1000 #this is a comment#)
 ## Usage
 
 ```c#
-var scanner = new Scanner();
-var lexer = new Lexer();
-var tokens = scanner.Scan(@"EqualTo(10, 10)");
-var expression  = lexer.Read(tokens);
+var scanner = new DawalCompiler();
+var expression  = compiler.Compile(@"EqualTo(10, 10)");
 
-var result = expression.EvaluateAsync<bool>(new BaseEvaluationContext(new IEvaluationFunction[]{
+var result = expression.First().EvaluateAsync<bool>(new BaseEvaluationContext(new IEvaluationFunction[]{
   new EqualToFunction(),
 }));
 

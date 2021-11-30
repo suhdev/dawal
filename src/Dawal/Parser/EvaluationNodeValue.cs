@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 
 namespace Dawal.Parser
@@ -20,6 +21,11 @@ namespace Dawal.Parser
     public async Task<TResult> EvaluateAsync<TResult>(IEvaluationContext context)
     {
       return (TResult) await EvaluateAsync(context);
+    }
+
+    public override string ToString()
+    {
+      return Value is DateTimeOffset dateTimeOffset ? $"{dateTimeOffset:d}" : $"{Value}";
     }
   }
 }

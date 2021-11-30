@@ -29,5 +29,10 @@ namespace Dawal.Parser
     {
       return (TResult)await EvaluateAsync(context);
     }
+
+    public override string ToString()
+    {
+      return $"{_identifier}(${string.Join(", ", _operands.Select(x => x.ToString()))})";
+    }
   }
 }

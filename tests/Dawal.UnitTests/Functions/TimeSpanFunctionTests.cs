@@ -41,6 +41,21 @@ namespace Dawal.UnitTests.Functions
     }
     
     [Fact]
+    public async Task ShouldEvaluateValuesWithIsoTimeSpanCorrectly()
+    {
+      // arrange
+      var fn = new TimeSpanFunction();
+      var mock = new Mock<IEvaluationContext>();
+      
+      // act 
+      var result = await fn.ExecuteAsync(mock.Object, "P22DT2H");
+      
+      // assert
+      var ts = (TimeSpan)result;
+      ts.Should().Be(new TimeSpan(22, 2, 0, 0));
+    }
+    
+    [Fact]
     public async Task ShouldEvaluateValuesWithoutHoursCorrectly()
     {
       // arrange

@@ -10,11 +10,10 @@
     <PackageProjectUrl>https://github.com/suhdev/dawal</PackageProjectUrl>
     <RepositoryUrl>https://github.com/suhdev/dawal</RepositoryUrl>
     <Company>Sticky Ants Ltd</Company>
-    <Version>1.0.3</Version>
     <Product>Dawal</Product>
-    <AssemblyVersion>1.0.3</AssemblyVersion>
-    <FileVersion>1.0.3</FileVersion>
-    <PackageVersion>1.0.3</PackageVersion>
+    <AssemblyVersion>1.0.4</AssemblyVersion>
+    <FileVersion>1.0.4</FileVersion>
+    <PackageVersion>1.0.4</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

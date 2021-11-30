@@ -32,6 +32,7 @@ jobs:
         PROJECT_FILE_PATH: src/Dawal/Dawal.csproj
         # NuGet package id, used for version detection & defaults to project name
         PACKAGE_NAME: Dawal
+        VERSION_REGEX: ^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$
         # Flag to toggle git tagging, enabled by default
         TAG_COMMIT: true
         NUGET_KEY: ${{ secrets.NUGET_KEY }}

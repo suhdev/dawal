@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Dawal.Parser.Functions
 {
@@ -15,6 +16,11 @@ namespace Dawal.Parser.Functions
           nameof(TimeSpanFunction),
           ExpectedNumberOfArguments,
           values.Length);
+      }
+
+      if (values.Length == 1 && values[0] is string timespan)
+      {
+        return XmlConvert.ToTimeSpan(timespan);
       }
 
       var days = values[0].CoerceToNumber();

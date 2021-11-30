@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading.Tasks;
 using Dawal.Parser;
 using Dawal.Parser.Functions;
@@ -8,41 +7,41 @@ using Xunit;
 
 namespace Dawal.UnitTests.Functions
 {
-  public class SumFunctionTests
+  public class FormatFunctionTests
   {
     [Fact]
     public async Task ShouldEvaluateValuesCorrectly()
     {
       // arrange
-      var fn = new SumFunction();
+      var fn = new FormatFunction();
       var mock = new Mock<IEvaluationContext>();
       
       // act 
-      var result = await fn.ExecuteAsync(mock.Object, 10 , 100 , 200, 300);
+      var result = await fn.ExecuteAsync(mock.Object, "this is a {0} != {1}" , 100 , 200);
       
       // assert
-      result.Should().Be(new []{10 , 100 , 200, 300}.Sum());
+      result.Should().Be("this is a 100 != 200");
     }
     
     [Fact]
-    public async Task ShouldEvaluateValuesCorrectlyWithMixOfValueTypes()
+    public async Task ShouldEvaluateValuesWithStringsCorrectly()
     {
       // arrange
-      var fn = new SumFunction();
+      var fn = new FormatFunction();
       var mock = new Mock<IEvaluationContext>();
       
       // act 
-      var result = await fn.ExecuteAsync(mock.Object, 10 , false , 200, 300, "12.22");
+      var result = await fn.ExecuteAsync(mock.Object, "this is a {0} != {1}" , "abc" , "bab");
       
       // assert
-      result.Should().Be(new decimal[]{10 , 0 , 200, 300, (decimal)12.22}.Sum());
+      result.Should().Be("this is a abc != bab");
     }
     
     [Fact]
     public async Task ItShouldThrowIfMoreThanTwoParametersArePassed()
     {
       // arrange 
-      var fn = new SumFunction();
+      var fn = new FormatFunction();
       var mock = new Mock<IEvaluationContext>();
       
       // act & assert

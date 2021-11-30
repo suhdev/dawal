@@ -8,41 +8,41 @@ using Xunit;
 
 namespace Dawal.UnitTests.Functions
 {
-  public class SumFunctionTests
+  public class AverageFunctionTests
   {
     [Fact]
     public async Task ShouldEvaluateValuesCorrectly()
     {
       // arrange
-      var fn = new SumFunction();
+      var fn = new AverageFunction();
       var mock = new Mock<IEvaluationContext>();
       
       // act 
       var result = await fn.ExecuteAsync(mock.Object, 10 , 100 , 200, 300);
       
       // assert
-      result.Should().Be(new []{10 , 100 , 200, 300}.Sum());
+      result.Should().Be(new []{10 , 100 , 200, 300}.Average());
     }
     
     [Fact]
     public async Task ShouldEvaluateValuesCorrectlyWithMixOfValueTypes()
     {
       // arrange
-      var fn = new SumFunction();
+      var fn = new AverageFunction();
       var mock = new Mock<IEvaluationContext>();
       
       // act 
       var result = await fn.ExecuteAsync(mock.Object, 10 , false , 200, 300, "12.22");
       
       // assert
-      result.Should().Be(new decimal[]{10 , 0 , 200, 300, (decimal)12.22}.Sum());
+      result.Should().Be(new decimal[]{10 , 0 , 200, 300, (decimal)12.22}.Average());
     }
     
     [Fact]
-    public async Task ItShouldThrowIfMoreThanTwoParametersArePassed()
+    public async Task ItShouldThrowIfInvalidNumberOfArgumentsArePassed()
     {
       // arrange 
-      var fn = new SumFunction();
+      var fn = new AverageFunction();
       var mock = new Mock<IEvaluationContext>();
       
       // act & assert

@@ -28,6 +28,9 @@ namespace Dawal.UnitTests
     [InlineData("AND(null, 10)", 6)]
     [InlineData("AND(null, TRUE)", 6)]
     [InlineData("AND(null, FALSE)", 6)]
+    [InlineData("\"abc\"", 1)]
+    [InlineData("\"a'b'c\"", 1)]
+    [InlineData("'a\"b\"c'", 1)]
     public void ItShouldScanTokensCorrectly(string program, int tokenCount)
     {
       var scanner = new Scanner();
@@ -49,6 +52,9 @@ namespace Dawal.UnitTests
     [InlineData(")", TokenType.RParen)]
     [InlineData(",", TokenType.Comma)]
     [InlineData("AND", TokenType.Identifier)]
+    [InlineData("\"abc\"", TokenType.String)]
+    [InlineData("\"a'b'c\"", TokenType.String)]
+    [InlineData("'a\"b\"c'", TokenType.String)]
     public void ItShouldScanTokensCorrectlyWithTypes(string program, TokenType tokenType)
     {
       var scanner = new Scanner();

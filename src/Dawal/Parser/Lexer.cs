@@ -85,7 +85,7 @@ namespace Dawal.Parser
 
     private string ReadString()
     {
-      return ReadToken(TokenType.String).Value.Trim('\'');
+      return ReadToken(TokenType.String).Value.Trim('\'', '"');
     }
 
     private decimal ReadNumber()

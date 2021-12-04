@@ -18,6 +18,7 @@ namespace Dawal.UnitTests
     [InlineData("Not(10)", false)]
     [InlineData("Not('abc')", false)]
     [InlineData("not(Not(''))", false)]
+    [InlineData("eq('string', \"string\")", true)]
     public async Task ShouldGenerateValidResult(string program, bool expected)
     {
       // arrange

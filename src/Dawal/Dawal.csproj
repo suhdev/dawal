@@ -11,9 +11,9 @@
     <RepositoryUrl>https://github.com/suhdev/dawal</RepositoryUrl>
     <Company>Sticky Ants Ltd</Company>
     <Product>Dawal</Product>
-    <AssemblyVersion>1.0.7</AssemblyVersion>
-    <FileVersion>1.0.7</FileVersion>
-    <PackageVersion>1.0.7</PackageVersion>
+    <AssemblyVersion>1.0.8</AssemblyVersion>
+    <FileVersion>1.0.8</FileVersion>
+    <PackageVersion>1.0.8</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

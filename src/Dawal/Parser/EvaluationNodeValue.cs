@@ -25,7 +25,22 @@ namespace Dawal.Parser
 
     public override string ToString()
     {
-      return Value is DateTimeOffset dateTimeOffset ? $"{dateTimeOffset:d}" : $"{Value}";
+      return Value is string strValue? CreateStringValue(strValue) : $"{Value.ToString()}";
+    }
+    
+    private string CreateStringValue(string value)
+    {
+      if (value == null)
+      {
+        return "null";
+      }
+
+      if (value.Contains("'"))
+      {
+        return $"\"{value}\"";
+      }
+
+      return $"'{value}'";
     }
   }
 }

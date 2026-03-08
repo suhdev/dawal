@@ -6,6 +6,7 @@ namespace Dawal.Parser
   {
     CancellationToken CancellationToken { get; set; }
     IEvaluationFunction GetFunction(string identifier);
+    object GetVariable(string name);
   }
 
   public class Question

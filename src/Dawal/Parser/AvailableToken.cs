@@ -26,6 +26,8 @@ namespace Dawal.Parser
       new AvailableToken(TokenType.Comma, TokenRegex.Comma),
       new AvailableToken(TokenType.LParen, TokenRegex.LParen),
       new AvailableToken(TokenType.RParen, TokenRegex.RParen),
+      new AvailableToken(TokenType.Variable, TokenRegex.Variable),
+      new AvailableToken(TokenType.Dot, TokenRegex.Dot),
       new AvailableToken(TokenType.Identifier, TokenRegex.Identifier)
     };
   }

@@ -11,6 +11,8 @@ namespace Dawal.Parser
     Comma, 
     LParen,
     RParen,
+    Dot,
+    Variable,
     Identifier
   }
 }

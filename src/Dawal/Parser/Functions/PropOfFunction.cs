@@ -7,7 +7,7 @@ namespace Dawal.Parser.Functions
   [EvaluationFunction("prop_of")]
   public class PropOfFunction : IEvaluationFunction
   {
-    public async Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
+    public Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
     {
       if (values.Length != 2)
       {
@@ -19,7 +19,7 @@ namespace Dawal.Parser.Functions
 
       if (firstVal is null || secondVal is null)
       {
-        return null;
+        return Task.FromResult<object>(null);
       }
 
       if (!(secondVal is string key))
@@ -27,7 +27,7 @@ namespace Dawal.Parser.Functions
         throw new Exception($"Expected second parameter of prop of to be string but got {secondVal} instead");
       }
 
-      return firstVal.GetProperty(key);
+      return Task.FromResult(firstVal.GetProperty(key));
     }
   }
 }

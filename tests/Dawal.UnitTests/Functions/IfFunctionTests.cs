@@ -30,6 +30,38 @@ namespace Dawal.UnitTests.Functions
       // assert
       result.Should().Be(output);
     }
+
+    [Theory]
+    [InlineData(1, "truthy", "falsy", "truthy")]
+    [InlineData(0, "truthy", "falsy", "falsy")]
+    [InlineData("hello", "truthy", "falsy", "truthy")]
+    [InlineData("", "truthy", "falsy", "falsy")]
+    public async Task ShouldCoerceNonBoolConditionToBool(object condition, object val1, object val2, object output)
+    {
+      // arrange
+      var fn = new IfFunction();
+      var mock = new Mock<IEvaluationContext>();
+
+      // act
+      var result = await fn.ExecuteAsync(mock.Object, condition, val1, val2);
+
+      // assert
+      result.Should().Be(output);
+    }
+
+    [Fact]
+    public async Task ShouldReturnFalseBranchWhenConditionIsNull()
+    {
+      // arrange
+      var fn = new IfFunction();
+      var mock = new Mock<IEvaluationContext>();
+
+      // act
+      var result = await fn.ExecuteAsync(mock.Object, null, "truthy", "falsy");
+
+      // assert
+      result.Should().Be("falsy");
+    }
     
     [Fact]
     public async Task ItShouldThrowIfInvalidNumberOfArgumentsArePassed()

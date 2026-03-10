@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Dawal.Parser;
 using FluentAssertions;
@@ -85,11 +84,24 @@ namespace Dawal.UnitTests
     [InlineData("'false")]
     [InlineData("[")]
     [InlineData("[NULL]")]
-    public void ItShouldThrowOnInvalidCharacterStream(string program)
+    public void ItShouldThrowParsingExceptionOnInvalidCharacterStream(string program)
     {
       var scanner = new Scanner();
 
-      Assert.Throws<Exception>(() => scanner.Scan(program));
+      Assert.Throws<ParsingException>(() => scanner.Scan(program));
+    }
+
+    [Theory]
+    [InlineData("!12", 0)]
+    [InlineData("@233", 0)]
+    [InlineData("[NULL]", 0)]
+    public void ItShouldReportPositionInParsingException(string program, int expectedPosition)
+    {
+      var scanner = new Scanner();
+
+      var ex = Assert.Throws<ParsingException>(() => scanner.Scan(program));
+
+      ex.Position.Should().Be(expectedPosition);
     }
   }
 }

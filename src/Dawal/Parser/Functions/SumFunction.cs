@@ -7,7 +7,7 @@ namespace Dawal.Parser.Functions
   public class SumFunction : IEvaluationFunction
   {
     private const int ExpectedNumberOfArguments = 1;
-    public async Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
+    public Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
     {
       if (values.Length == 0)
       {
@@ -16,7 +16,7 @@ namespace Dawal.Parser.Functions
           values.Length);
       }
 
-      return values.Sum(x => x.CoerceToNumber());
+      return Task.FromResult<object>(values.Sum(x => x.CoerceToNumber()));
     }
   }
 }

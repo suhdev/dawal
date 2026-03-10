@@ -8,7 +8,7 @@ namespace Dawal.Parser.Functions
   public class LessThanOrEqualFunction : IEvaluationFunction
   {
     private const int ExpectedNumberOfArguments = 2;
-    public async Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
+    public Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
     {
       if (values.Length != ExpectedNumberOfArguments)
       {
@@ -17,9 +17,11 @@ namespace Dawal.Parser.Functions
             ExpectedNumberOfArguments, values.Length);
       }
       
-      var firstVal = values.First();
-      var secondVal = values.Last();
+      return Task.FromResult(Evaluate(values.First(), values.Last()));
+    }
 
+    private static object Evaluate(object firstVal, object secondVal)
+    {
       if (firstVal is null || secondVal is null)
       {
         return false;
@@ -42,8 +44,7 @@ namespace Dawal.Parser.Functions
 
       if (firstVal is bool boolValue)
       {
-        return boolValue == (bool)secondVal || 
-               boolValue == false && (bool)secondVal;
+        return !boolValue || (bool)secondVal;
       }
 
       if (firstVal is string stringValue)

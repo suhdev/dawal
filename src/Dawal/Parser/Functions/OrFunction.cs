@@ -6,7 +6,7 @@ namespace Dawal.Parser.Functions
   [EvaluationFunction("or")]
   public class OrFunction : IEvaluationFunction
   {
-    public async Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
+    public Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
     {
       if (values.Length == 0)
       {
@@ -14,7 +14,7 @@ namespace Dawal.Parser.Functions
           1, values.Length);
       }
       
-      return values.Any(x =>  x.CoerceToBool());
+      return Task.FromResult<object>(values.Any(x =>  x.CoerceToBool()));
     }
   }
 }

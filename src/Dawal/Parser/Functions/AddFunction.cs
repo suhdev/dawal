@@ -7,18 +7,18 @@ namespace Dawal.Parser.Functions
   [EvaluationFunction("add")]
   public class AddFunction : IEvaluationFunction
   {
-    public async Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
+    public Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
     {
       if (values.Length == 0)
       {
-        throw new InvalidNumberOfArgumentException(nameof(ConcatenateFunction),
+        throw new InvalidNumberOfArgumentException(nameof(AddFunction),
           1,
           0);
       }
 
       if (values[0] is string str)
       {
-        return string.Concat(values);
+        return Task.FromResult<object>(string.Concat(values));
       }
 
       if (values[0] is DateTime dateTime)
@@ -27,13 +27,13 @@ namespace Dawal.Parser.Functions
         {
           if (values[1] is TimeSpan timeSpan)
           {
-            return dateTime + timeSpan;
+            return Task.FromResult<object>(dateTime + timeSpan);
           }
 
-          return dateTime + TimeSpan.FromDays((int)values[1].CoerceToNumber());
+          return Task.FromResult<object>(dateTime + TimeSpan.FromDays((int)values[1].CoerceToNumber()));
         }
 
-        return dateTime;
+        return Task.FromResult<object>(dateTime);
       }
       
       if (values[0] is DateTimeOffset dateTimeOffset)
@@ -42,16 +42,16 @@ namespace Dawal.Parser.Functions
         {
           if (values[1] is TimeSpan timeSpan)
           {
-            return dateTimeOffset + timeSpan;
+            return Task.FromResult<object>(dateTimeOffset + timeSpan);
           }
 
-          return dateTimeOffset + TimeSpan.FromDays((int)values[1].CoerceToNumber());
+          return Task.FromResult<object>(dateTimeOffset + TimeSpan.FromDays((int)values[1].CoerceToNumber()));
         }
 
-        return dateTimeOffset;
+        return Task.FromResult<object>(dateTimeOffset);
       }
 
-      return values.Sum(v => ObjectExtensions.CoerceToNumber(v));
+      return Task.FromResult<object>(values.Sum(v => ObjectExtensions.CoerceToNumber(v)));
     }
   }
 }

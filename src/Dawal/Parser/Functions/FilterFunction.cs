@@ -13,7 +13,7 @@ namespace Dawal.Parser.Functions
     {
       if (values.Length < MinimumNumberOfArguments)
       {
-        throw new InvalidNumberOfArgumentException(nameof(FindOneFunction),
+        throw new InvalidNumberOfArgumentException(nameof(FilterFunction),
           MinimumNumberOfArguments,
           values.Length);
       }
@@ -25,39 +25,7 @@ namespace Dawal.Parser.Functions
       }
 
       var parameters = values.Skip(1).ToArray();
-      var fns = new List<FindExecutionValue>();
-
-      if (parameters.Length % 3 == 0)
-      {
-        for (var i = 0; i < parameters.Length; i += 3)
-        {
-          var prop = (string)parameters[i];
-          var fn = parameters[i + 1].ToStringValue();
-          var value = parameters[i + 2];
-
-          fns.Add(new FindExecutionValue
-          {
-            FunctionName = fn, 
-            PropName = prop,
-            Value = value
-          });
-        }
-      }
-      else
-      {
-        for (var i = 0; i < parameters.Length; i += 2)
-        {
-          var prop = (string)parameters[i];
-          var value = parameters[i + 1];
-
-          fns.Add(new FindExecutionValue
-          {
-            FunctionName = "equal_to", 
-            PropName = prop,
-            Value = value
-          });
-        }
-      }
+      var fns = FindConditionParser.Parse(parameters);
 
       var results = new List<object>();
 
@@ -79,13 +47,6 @@ namespace Dawal.Parser.Functions
       }
 
       return results;
-    }
-
-    private class FindExecutionValue
-    {
-      public string FunctionName { get; set; }
-      public string PropName { get; set; }
-      public object Value { get; set; }
     }
   }
 }

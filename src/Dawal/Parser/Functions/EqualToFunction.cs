@@ -7,7 +7,7 @@ namespace Dawal.Parser.Functions
   public class EqualToFunction : IEvaluationFunction
   {
     private const int ExpectedNumberOfArguments = 2;
-    public async Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
+    public Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
     {
       if (values.Length != ExpectedNumberOfArguments)
       {
@@ -17,9 +17,11 @@ namespace Dawal.Parser.Functions
           values.Length);
       }
       
-      var firstVal = values.First();
-      var secondVal = values.Last();
+      return Task.FromResult(Evaluate(values.First(), values.Last()));
+    }
 
+    private static object Evaluate(object firstVal, object secondVal)
+    {
       if (firstVal is null && secondVal is null)
       {
         return true;

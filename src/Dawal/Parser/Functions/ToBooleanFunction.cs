@@ -11,7 +11,7 @@ namespace Dawal.Parser.Functions
     {
       if (values.Length != ExpectedNumberOfArguments)
       {
-        throw new InvalidNumberOfArgumentException(nameof(ToNumberFunction),
+        throw new InvalidNumberOfArgumentException(nameof(ToBooleanFunction),
           ExpectedNumberOfArguments,
           values.Length);
       }

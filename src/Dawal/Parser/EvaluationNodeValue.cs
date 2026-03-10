@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 
 namespace Dawal.Parser
@@ -13,9 +12,9 @@ namespace Dawal.Parser
       Value = value;
     }
     
-    public async Task<object> EvaluateAsync(IEvaluationContext context)
+    public Task<object> EvaluateAsync(IEvaluationContext context)
     {
-      return Value;
+      return Task.FromResult<object>(Value);
     }
 
     public async Task<TResult> EvaluateAsync<TResult>(IEvaluationContext context)

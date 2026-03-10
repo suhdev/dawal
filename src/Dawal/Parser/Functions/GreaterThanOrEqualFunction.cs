@@ -53,7 +53,7 @@ namespace Dawal.Parser.Functions
 
       if (firstVal is bool boolValue)
       {
-        return boolValue || firstVal.ToBool() == secondVal.ToBool();
+        return boolValue || !(bool)secondVal;
       }
 
       if (firstVal is string stringValue)

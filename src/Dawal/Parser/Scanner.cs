@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Dawal.Parser
@@ -18,7 +17,7 @@ namespace Dawal.Parser
         var token = Peek();
         if (token == null)
         {
-          throw new Exception("Invalid script");
+          throw new ParsingException(_position, script);
         }
         
         _position += token.Value.Length;

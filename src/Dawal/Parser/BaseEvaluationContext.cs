@@ -19,9 +19,16 @@ namespace Dawal.Parser
     
     public IEvaluationFunction GetFunction(string identifier)
     {
-      return _functions.First(x =>
+      var fn = _functions.FirstOrDefault(x =>
         x.GetType().Name.IsEqual(identifier) ||
         x.GetCustomAttribute<EvaluationFunctionAttribute>().MatchIdentifier(identifier));
+
+      if (fn == null)
+      {
+        throw new FunctionNotFoundException(identifier);
+      }
+
+      return fn;
     }
 
     public object GetVariable(string name)

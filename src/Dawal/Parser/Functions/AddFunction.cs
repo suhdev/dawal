@@ -11,7 +11,7 @@ namespace Dawal.Parser.Functions
     {
       if (values.Length == 0)
       {
-        throw new InvalidNumberOfArgumentException(nameof(ConcatenateFunction),
+        throw new InvalidNumberOfArgumentException(nameof(AddFunction),
           1,
           0);
       }

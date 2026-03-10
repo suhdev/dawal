@@ -6,14 +6,14 @@ namespace Dawal.Parser.Functions
   [EvaluationFunction("current_date_timespan", "currentdate_timespan", "now_timespan")]
   public class CurrentDateTimeFromTimeSpanFunction : IEvaluationFunction
   {
-    private const int ExpectedNumberOfArguments = 0;
+    private const int MinimumNumberOfArguments = 1;
     public async Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
     {
       if (values.Length == 0)
       {
         throw new InvalidNumberOfArgumentException(
           nameof(CurrentDateTimeFromTimeSpanFunction),
-          ExpectedNumberOfArguments,
+          MinimumNumberOfArguments,
           values.Length);
       }
       

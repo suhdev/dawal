@@ -49,7 +49,7 @@ namespace Dawal.Parser.Functions
 
       if (firstVal is bool boolValue)
       {
-        return boolValue && true != (bool)secondVal;
+        return boolValue && !(bool)secondVal;
       }
 
       if (firstVal is string stringValue)

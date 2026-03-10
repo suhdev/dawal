@@ -13,7 +13,7 @@ namespace Dawal.Parser.Functions
       if (values.Length != ExpectedNumberOfArguments)
       {
         throw new InvalidNumberOfArgumentException(
-          nameof(TimeSpanFunction),
+          nameof(BetweenFunction),
           ExpectedNumberOfArguments,
           values.Length);
       }

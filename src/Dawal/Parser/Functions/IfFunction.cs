@@ -30,7 +30,7 @@ namespace Dawal.Parser.Functions
         return boolVal ? secondVal : thirdVal;
       }
 
-      return thirdVal;
+      return firstVal.CoerceToBool() ? secondVal : thirdVal;
     }
   }
 }

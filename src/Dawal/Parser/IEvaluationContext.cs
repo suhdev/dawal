@@ -8,15 +8,4 @@ namespace Dawal.Parser
     IEvaluationFunction GetFunction(string identifier);
     object GetVariable(string name);
   }
-
-  public class Question
-  {
-    public Answer Answer { get; set; }
-  }
-
-  public class Answer
-  {
-    public decimal Number { get; set; }
-    public bool Boolean { get; set; }
-  }
 }

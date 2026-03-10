@@ -15,7 +15,16 @@ namespace Dawal.Parser
 
       while (_tokens.Count > 0)
       {
-        var expression = ReadFunction();
+        IEvaluationNode expression;
+
+        if (IsNextToken(TokenType.Variable))
+        {
+          expression = ReadVariable();
+        }
+        else
+        {
+          expression = ReadFunction();
+        }
 
         result.Add(expression);
       }
@@ -49,12 +58,33 @@ namespace Dawal.Parser
         return ReadFunction();
       }
 
+      if (IsNextToken(TokenType.Variable))
+      {
+        return ReadVariable();
+      }
+
       if (IsNextToken(TokenType.Boolean, TokenType.Number, TokenType.Null, TokenType.String))
       {
         return ReadValue();
       }
 
       throw new Exception($"Expected primitive token but got {Peek().TokenType}");
+    }
+
+    private IEvaluationNode ReadVariable()
+    {
+      var token = ReadToken(TokenType.Variable);
+      var name = token.Value.TrimStart('$');
+      var path = new List<string>();
+
+      while (_tokens.Count > 0 && IsNextToken(TokenType.Dot))
+      {
+        SkipToken(TokenType.Dot);
+        var property = ReadToken(TokenType.Identifier).Value;
+        path.Add(property);
+      }
+
+      return new VariableEvaluationNode(name, path);
     }
 
     private IEvaluationNode ReadValue()

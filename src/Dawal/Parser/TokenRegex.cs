@@ -13,6 +13,8 @@ namespace Dawal.Parser
     public static Regex LParen { get; } = new Regex("^\\(");
     public static Regex RParen { get; } = new Regex("^\\)");
     public static Regex Comma { get; } = new Regex("^,");
+    public static Regex Dot { get; } = new Regex("^\\.");
+    public static Regex Variable { get; } = new Regex("^\\$[a-zA-Z][a-zA-Z0-9_]*");
     public static Regex Identifier { get; } = new Regex("^[a-z][a-z0-9_]*", RegexOptions.IgnoreCase);
   }
 }

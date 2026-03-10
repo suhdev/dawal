@@ -31,6 +31,9 @@ namespace Dawal.UnitTests
     [InlineData("\"abc\"", 1)]
     [InlineData("\"a'b'c\"", 1)]
     [InlineData("'a\"b\"c'", 1)]
+    [InlineData("$myVar", 1)]
+    [InlineData("$user.name", 3)]
+    [InlineData("$a.b.c", 5)]
     public void ItShouldScanTokensCorrectly(string program, int tokenCount)
     {
       var scanner = new Scanner();
@@ -55,11 +58,23 @@ namespace Dawal.UnitTests
     [InlineData("\"abc\"", TokenType.String)]
     [InlineData("\"a'b'c\"", TokenType.String)]
     [InlineData("'a\"b\"c'", TokenType.String)]
+    [InlineData("$myVar", TokenType.Variable)]
+    [InlineData("$user", TokenType.Variable)]
     public void ItShouldScanTokensCorrectlyWithTypes(string program, TokenType tokenType)
     {
       var scanner = new Scanner();
       var tokens = scanner.Scan(program);
       tokens.First().TokenType.Should().Be(tokenType);
+    }
+
+    [Theory]
+    [InlineData("$user.name", TokenType.Variable, TokenType.Dot, TokenType.Identifier)]
+    [InlineData("$a.b.c", TokenType.Variable, TokenType.Dot, TokenType.Identifier, TokenType.Dot, TokenType.Identifier)]
+    public void ItShouldScanVariableWithMemberAccessCorrectly(string program, params TokenType[] expectedTypes)
+    {
+      var scanner = new Scanner();
+      var tokens = scanner.Scan(program);
+      tokens.Select(t => t.TokenType).Should().Equal(expectedTypes);
     }
     
     [Theory]

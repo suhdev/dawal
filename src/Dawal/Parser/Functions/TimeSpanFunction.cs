@@ -8,7 +8,7 @@ namespace Dawal.Parser.Functions
   public class TimeSpanFunction : IEvaluationFunction
   {
     private const int ExpectedNumberOfArguments = 1;
-    public async Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
+    public Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
     {
       if (values.Length == 0)
       {
@@ -20,7 +20,7 @@ namespace Dawal.Parser.Functions
 
       if (values.Length == 1 && values[0] is string timespan)
       {
-        return XmlConvert.ToTimeSpan(timespan);
+        return Task.FromResult<object>(XmlConvert.ToTimeSpan(timespan));
       }
 
       var days = values[0].CoerceToNumber();
@@ -34,7 +34,7 @@ namespace Dawal.Parser.Functions
         ? values[3].CoerceToNumber()
         : 0;
 
-      return new TimeSpan((int)days, (int)hours, (int)minutes, (int)seconds);
+      return Task.FromResult<object>(new TimeSpan((int)days, (int)hours, (int)minutes, (int)seconds));
     }
   }
 }

@@ -8,7 +8,7 @@ namespace Dawal.Parser.Functions
   {
     private const int ExpectedNumberOfArguments = 3;
     
-    public async Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
+    public Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
     {
       if (values.Length != ExpectedNumberOfArguments)
       {
@@ -21,7 +21,7 @@ namespace Dawal.Parser.Functions
       var value = values.First();
       if (value is null)
       {
-        return false;
+        return Task.FromResult<object>(false);
       }
       
       if (value.IsNumber())
@@ -29,7 +29,7 @@ namespace Dawal.Parser.Functions
         var val = value.CoerceToNumber();
         var min = values[1].CoerceToNumber();
         var max = values[2].CoerceToNumber();
-        return val >= min && val <= max;
+        return Task.FromResult<object>(val >= min && val <= max);
       }
 
       if (value.IsDate())
@@ -37,10 +37,10 @@ namespace Dawal.Parser.Functions
         var val = value.CoerceToDateTime();
         var min = values[1].CoerceToDateTime();
         var max = values[2].CoerceToDateTime();
-        return val >= min && val <= max;
+        return Task.FromResult<object>(val >= min && val <= max);
       }
 
-      return false;
+      return Task.FromResult<object>(false);
     }
   }
 }

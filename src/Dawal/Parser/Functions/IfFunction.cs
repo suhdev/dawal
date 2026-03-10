@@ -6,7 +6,7 @@ namespace Dawal.Parser.Functions
   public class IfFunction : IEvaluationFunction
   {
     private const int ExpectedNumberOfArguments = 3;
-    public async Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
+    public Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
     {
       if (values.Length != ExpectedNumberOfArguments)
       {
@@ -22,15 +22,15 @@ namespace Dawal.Parser.Functions
 
       if (firstVal is null)
       {
-        return thirdVal;
+        return Task.FromResult(thirdVal);
       }
 
       if (firstVal is bool boolVal)
       {
-        return boolVal ? secondVal : thirdVal;
+        return Task.FromResult(boolVal ? secondVal : thirdVal);
       }
 
-      return firstVal.CoerceToBool() ? secondVal : thirdVal;
+      return Task.FromResult(firstVal.CoerceToBool() ? secondVal : thirdVal);
     }
   }
 }

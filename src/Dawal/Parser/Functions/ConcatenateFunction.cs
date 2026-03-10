@@ -5,7 +5,7 @@ namespace Dawal.Parser.Functions
   [EvaluationFunction("concat", "concatenate")]
   public class ConcatenateFunction : IEvaluationFunction
   {
-    public async Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
+    public Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
     {
       if (values.Length == 0)
       {
@@ -14,7 +14,7 @@ namespace Dawal.Parser.Functions
           0);
       }
       
-      return string.Concat(values);
+      return Task.FromResult<object>(string.Concat(values));
     }
   }
 }

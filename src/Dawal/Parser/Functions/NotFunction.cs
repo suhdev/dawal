@@ -7,21 +7,21 @@ namespace Dawal.Parser.Functions
   public class NotFunction : IEvaluationFunction
   {
     private const int ExpectedNumberOfArguments = 1;
-    public async Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
+    public Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
     {
       if (values.Length != ExpectedNumberOfArguments)
       {
-        throw new InvalidNumberOfArgumentException("not", ExpectedNumberOfArguments, values.Length);
+        throw new InvalidNumberOfArgumentException(nameof(NotFunction), ExpectedNumberOfArguments, values.Length);
       }
 
       var firstVal = values.First();
 
       if (firstVal is null)
       {
-        return true;
+        return Task.FromResult<object>(true);
       }
 
-      return !firstVal.CoerceToBool();
+      return Task.FromResult<object>(!firstVal.CoerceToBool());
     }
   }
 }

@@ -7,7 +7,7 @@ namespace Dawal.Parser.Functions
   public class ToBooleanFunction : IEvaluationFunction
   {
     private const int ExpectedNumberOfArguments = 1;
-    public async Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
+    public Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
     {
       if (values.Length != ExpectedNumberOfArguments)
       {
@@ -16,7 +16,7 @@ namespace Dawal.Parser.Functions
           values.Length);
       }
 
-      return values.First().CoerceToBool();
+      return Task.FromResult<object>(values.First().CoerceToBool());
     }
   }
 }

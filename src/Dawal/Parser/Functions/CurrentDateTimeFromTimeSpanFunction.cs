@@ -7,7 +7,7 @@ namespace Dawal.Parser.Functions
   public class CurrentDateTimeFromTimeSpanFunction : IEvaluationFunction
   {
     private const int MinimumNumberOfArguments = 1;
-    public async Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
+    public Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
     {
       if (values.Length == 0)
       {
@@ -27,10 +27,9 @@ namespace Dawal.Parser.Functions
       var seconds = values.Length > 3
         ? values[3].CoerceToNumber()
         : 0;
-      
 
-      return DateTimeOffset.UtcNow + 
-             new TimeSpan((int)days, (int)hours, (int)minutes, (int)seconds);
+      return Task.FromResult<object>(DateTimeOffset.UtcNow + 
+             new TimeSpan((int)days, (int)hours, (int)minutes, (int)seconds));
     }
   }
 }

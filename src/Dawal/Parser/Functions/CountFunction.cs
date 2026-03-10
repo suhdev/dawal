@@ -7,7 +7,7 @@ namespace Dawal.Parser.Functions
   [EvaluationFunction("count")]
   public class CountFunction : IEvaluationFunction
   {
-    public async Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
+    public Task<object> ExecuteAsync(IEvaluationContext context, params object[] values)
     {
       if (values.Length != 1)
       {
@@ -18,15 +18,15 @@ namespace Dawal.Parser.Functions
 
       if (values[0] is string str)
       {
-        return str.Length;
+        return Task.FromResult<object>(str.Length);
       }
 
       if (values[0].IsNumber())
       {
-        return values[0];
+        return Task.FromResult(values[0]);
       }
 
-      return ((IEnumerable)values[0]).OfType<object>().Count();
+      return Task.FromResult<object>(((IEnumerable)values[0]).OfType<object>().Count());
     }
   }
 }
